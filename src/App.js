@@ -5,38 +5,54 @@ import './App.css';
 import Greet from './Greet';
 import Counter from './Counter';
 
-function App() {
-  return (
-    <div>
-      <Counter 
-        changeBy={2}
-        initialValue={10}
-      />
-      <Counter 
-        initialValue={99}
-        changeBy={33}      
-      />
-      <Counter 
-        changeBy={8}
-        initialValue={-5}
-      />
-      <Greet 
-        whom="Cthulu"
-        how="S'up"
-      />
-      <Greet 
-        whom="Doctor Who"
-        how="Allo"
-      />
-      <Greet 
-        whom="You"
-        how="Hey"
-        color="blue"
-      />
+// I want to move the state of the counters (and their behavior)
+// into the App.
+// I have to "lift state up" so that the Coutners can share state (and/behavior)
 
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      values: [
+        1111,
+        90
+      ]
+    };
+  }
+  render() {
+    return (
+      <div>
+        <Counter 
+          changeBy={2}
+          value={this.state.values[0]}
+          clickHandler={this._updateValue}
+          index={0}
+        />
+        <Counter 
+          value={this.state.values[1]}
+          changeBy={33}
+          clickHandler={this._updateValue}
+          index={1}
+        />
+      </div>
+    );
+  }
+
+  _updateValue = (index, newValue) => {
+    // make a copy of the current values array
+    const newValues = [
+      ...this.state.values
+    ];
+    // modify the copy
+    newValues[index] = newValue;
+
+    // update state with the new copy
+    this.setState({
+      values: newValues
+    });
+  }
 }
+
 
 export default App;
 
