@@ -25,13 +25,15 @@ class App extends React.Component {
         <Counter 
           changeBy={2}
           value={this.state.values[0]}
-          clickHandler={this._updateValue}
+          addHandler={this._incrementAll}
+          subtractHandler={this._decrementAll}
           index={0}
         />
         <Counter 
           value={this.state.values[1]}
           changeBy={33}
-          clickHandler={this._updateValue}
+          addHandler={this._incrementAll}
+          subtractHandler={this._decrementAll}
           index={1}
         />
       </div>
@@ -51,6 +53,21 @@ class App extends React.Component {
       values: newValues
     });
   }
+
+  _incrementAll = () => {
+    const newValues = this.state.values.map(num => num + 1);
+    this.setState({
+      values: newValues
+    })
+  }
+
+  _decrementAll = () => {
+    const newValues = this.state.values.map(num => num - 1);
+    this.setState({
+      values: newValues
+    })    
+  }
+
 }
 
 

@@ -22,8 +22,8 @@ class Counter extends React.Component {
         return (
             <div>
                 <h1>{this.props.value}</h1>
-                <button onClick={this._incrementValue}>+</button>
-                <button onClick={this._decrementValue}>-</button>  
+                <button onClick={this.props.addHandler}>+</button>
+                <button onClick={this.props.subtractHandler}>-</button>  
                 <button onClick={this._resetValue}>*</button>                 
             </div>
         );
