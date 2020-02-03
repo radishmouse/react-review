@@ -15,27 +15,45 @@ class App extends React.Component {
     this.state = {
       values: [
         1111,
-        90
+        90,
+        33,
+        23423,
+        1234123
+      ],
+      changeBy: [
+        2,
+        33,
+        1,
+        1,
+        1
       ]
     };
   }
   render() {
     return (
       <div>
-        <Counter 
-          changeBy={2}
-          value={this.state.values[0]}
-          addHandler={this._incrementAll}
-          subtractHandler={this._decrementAll}
-          index={0}
-        />
-        <Counter 
-          value={this.state.values[1]}
-          changeBy={33}
-          addHandler={this._incrementAll}
-          subtractHandler={this._decrementAll}
-          index={1}
-        />
+
+       {
+
+        this.state.values.map((num, index) => {
+          return (
+            <Counter
+              key={index}
+              index={index}
+              value={num}
+              addHandler={() => {
+                this._incrementAll(this.state.changeBy[index])
+              }}
+              subtractHandler={() => {
+                this._decrementAll(this.state.changeBy[index])
+              }}
+              resetHandler={this._updateValue}
+            />
+          )
+        })
+
+
+       }
       </div>
     );
   }
@@ -54,15 +72,15 @@ class App extends React.Component {
     });
   }
 
-  _incrementAll = () => {
-    const newValues = this.state.values.map(num => num + 1);
+  _incrementAll = (howMuch) => {
+    const newValues = this.state.values.map(num => num + howMuch);
     this.setState({
       values: newValues
     })
   }
 
-  _decrementAll = () => {
-    const newValues = this.state.values.map(num => num - 1);
+  _decrementAll = (howMuch) => {
+    const newValues = this.state.values.map(num => num - howMuch);
     this.setState({
       values: newValues
     })    

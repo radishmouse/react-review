@@ -51,7 +51,7 @@ class Counter extends React.Component {
     }
 
     _resetValue = () => {
-        this.props.clickHandler(this.props.index, this.state.initialValue);        
+        this.props.resetHandler(this.props.index, this.state.initialValue);        
         // this.setState({
         //     value: this.props.initialValue
         // });        
